@@ -1,23 +1,19 @@
 
-# Linux on codespaces
+# GeForce NOW in GitHub Codespaces
 
-Instead of using codespaces to make a proxy, use codespaces as the proxy
+Open this repository in a Codespace. The dev container starts Chromium and
+automatically opens the forwarded browser on port 3000. Sign in to GeForce NOW
+and start a game.
 
+The browser profile is saved in `.chrome-data` so your sign-in survives Codespace
+restarts. The display defaults to 1280x720 at 60 FPS to reduce decoding and
+forwarding load; increase the `CUSTOM_RES_W` and `CUSTOM_RES_H` values in
+`.devcontainer/devcontainer.json` if your Codespace handles higher resolutions
+smoothly.
 
-
-
-
-
-
-
-## Installation
-
-Run this command in termanal and press enter
-
-```bash
- docker stop chromium >/dev/null 2>&1 || true && docker rm chromium >/dev/null 2>&1 || true && docker run -d --name=chromium --security-opt seccomp=unconfined -p 3000:3000 --shm-size=2gb -v ${containerWorkspaceFolder}/.chrome-data:/config -e CHROME_CLI=https://play.geforcenow.com lscr.io/linuxserver/chromium:latest
-```
-when a popup appears bottom right, press the green button and a new tab should open with geforce now already oppened
+Codespaces does not provide a GPU, and its forwarded browser is not optimized
+for low-latency game streaming. GeForce NOW may perform better or may not work
+as expected compared with a supported local device and browser.
 
 
 

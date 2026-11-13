@@ -1,0 +1,15 @@
+{
+  "name": "GeForce NOW Browser",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "GeForce NOW Stream",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postStartCommand": "docker start chromium >/dev/null 2>&1 || docker run -d --name=chromium --restart unless-stopped --security-opt seccomp=unconfined -p 3000:3000 --shm-size=2gb -v ${containerWorkspaceFolder}/.chrome-data:/config -e CUSTOM_RES_W=1280 -e CUSTOM_RES_H=720 -e CUSTOM_RES_FPS=60 -e CHROME_CLI=https://play.geforcenow.com lscr.io/linuxserver/chromium:latest"
+}
